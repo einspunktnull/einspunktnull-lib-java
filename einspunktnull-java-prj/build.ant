@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="einspunktnull-java-build" default="build" basedir=".">
+
+	<!--property name="env.JAVA_HOME" location="C:\Program Files\Java\jdk1.7.0_25\bin\javac.exe" /-->
+	<property name="env.JAVA_HOME" location="C:\Program Files\Java\jdk1.6.0_45\bin\javac.exe" />
+
+	<path id="classpath">
+		<fileset dir="libs" includes="**/*.jar" />
+		<fileset dir="src" includes="**/*.java" />
+	</path>
+
+	<target name="clean">
+		<delete dir="build" />
+	</target>
+
+	<target name="makedirs" depends="clean">
+		<mkdir dir="build/classes" />
+		<mkdir dir="build/jar" />
+	</target>
+
+	<target name="compile" depends="makedirs">
+		<javac debug="on" srcdir="src" destdir="build/classes" fork="true" executable="${env.JAVA_HOME}" classpathref="classpath" />
+	</target>
+
+	<target name="makejar" depends="compile">
+		<jar destfile="build/jar/einspunktnull-java.jar">
+			<fileset dir="build/classes" />
+			<fileset dir="src" includes="**/*.java" />
+		</jar>
+	</target>
+
+
+	<target name="copy" depends="">
+		<copy file="build/jar/einspunktnull-java.jar" todir="D:\EINSPUNKTNULL\robo\rataway\soft\net.einspunktnull.rataway\osmod\lib\" overwrite="true" />
+		<!--
+		<copy file="build/jar/einspunktnull-java.jar" todir="D:\EINSPUNKTNULL\private\DynamoSky\DynamoSkyAndroidProjekt\libs\" overwrite="true" />
+		<copy file="build/jar/einspunktnull-java.jar" todir="D:\EINSPUNKTNULL\kunden\pingpool-online-production\teilauto\teilauto-mobile-svn\trunk\dev\htmlgen\teilauto_mobile_htmlgen\libs\" overwrite="true" />
+		<copy file="build/jar/einspunktnull-java.jar" todir="D:\EINSPUNKTNULL\robo\rataway\soft\Client\RatAwayClient\libs\" overwrite="true" />
+		<copy file="build/jar/einspunktnull-java.jar" todir="D:\EINSPUNKTNULL\robo\rataway\soft\Client\RatAwayClient\build\bin\lib\" overwrite="true" />
+		-->
+	</target>
+
+	<target name="build" depends="clean,compile,makejar,copy">
+	</target>
+</project>
