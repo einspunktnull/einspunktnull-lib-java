@@ -7,7 +7,7 @@
  * and open the template in the editor.
  */
 
-package net.einspunktnull.mvc;
+package net.einspunktnull.old.mvc;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

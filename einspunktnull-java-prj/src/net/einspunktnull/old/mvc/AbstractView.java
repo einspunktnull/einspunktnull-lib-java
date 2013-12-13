@@ -7,7 +7,7 @@
  * template in the editor.
  */
 
-package net.einspunktnull.mvc;
+package net.einspunktnull.old.mvc;
 
 import java.beans.PropertyChangeEvent;
 

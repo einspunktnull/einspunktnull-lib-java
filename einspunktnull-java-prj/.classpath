@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre6"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="libs/android-15/android.jar"/>
 	<classpathentry kind="lib" path="libs/greenDAO-1.2.0/greenDAO.jar"/>
 	<classpathentry kind="lib" path="libs/addon-google_apis-google_inc_-15/usb.jar"/>
@@ -12,5 +12,6 @@
 	<classpathentry kind="lib" path="libs/processing2.0.b8/processing-core.jar"/>
 	<classpathentry kind="lib" path="libs/pi4j-core.jar"/>
 	<classpathentry kind="lib" path="libs/xSocket-2.8.15.jar"/>
+	<classpathentry kind="lib" path="libs/commons-lang3-3.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

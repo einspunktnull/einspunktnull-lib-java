@@ -1,4 +1,4 @@
-package net.einspunktnull.mvc;
+package net.einspunktnull.old.mvc;
 
 import net.einspunktnull.events.PropertyAccessEvent;
 import net.einspunktnull.events.PropertyAccessEventListener;
