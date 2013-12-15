@@ -4,8 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
-import net.einspunktnull.util.Klass;
-
+import net.einspunktnull.util.KlazzUtils;
 import android.util.Log;
 
 public class Logg
@@ -105,7 +104,7 @@ public class Logg
 		if (obj instanceof String) { return (String) obj; }
 		if (obj instanceof Boolean || obj instanceof Double || obj instanceof Float || obj instanceof Integer) { return String.valueOf(obj); }
 		String tab = "    ";
-		String result = "class " + Klass.getClassSimpleName(obj) + "\n\r";
+		String result = "class " + KlazzUtils.getClassSimpleName(obj) + "\n\r";
 		Field[] fields = obj.getClass().getFields();
 		for (Field field : fields)
 		{

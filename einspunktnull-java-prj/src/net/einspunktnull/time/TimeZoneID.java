@@ -1,4 +1,4 @@
-package net.einspunktnull.util;
+package net.einspunktnull.time;
 
 public class TimeZoneID
 {

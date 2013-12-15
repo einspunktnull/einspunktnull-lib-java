@@ -1,7 +1,7 @@
 package net.einspunktnull.android.activity;
 
 import net.einspunktnull.android.io.Logg;
-import net.einspunktnull.util.Klass;
+import net.einspunktnull.util.KlazzUtils;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
@@ -40,7 +40,7 @@ public class EinspunktnullActivity extends Activity
 	 ******************************************************/
 	public void loggD(Object... objects)
 	{
-		String channel = Klass.getClassSimpleName(this);
+		String channel = KlazzUtils.getClassSimpleName(this);
 		logD(channel, objects);
 	}
 
@@ -51,7 +51,7 @@ public class EinspunktnullActivity extends Activity
 
 	public void loggE(Object... objects)
 	{
-		String channel = Klass.getClassSimpleName(this);
+		String channel = KlazzUtils.getClassSimpleName(this);
 		logE(channel, objects);
 	}
 

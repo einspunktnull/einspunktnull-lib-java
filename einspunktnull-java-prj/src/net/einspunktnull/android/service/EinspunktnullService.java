@@ -4,7 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import net.einspunktnull.android.io.Logg;
-import net.einspunktnull.util.Klass;
+import net.einspunktnull.util.KlazzUtils;
 import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -59,7 +59,7 @@ public abstract class EinspunktnullService extends Service
 	 ******************************************************/
 	public void loggD(Object... objects)
 	{
-		String channel = Klass.getClassSimpleName(this);
+		String channel = KlazzUtils.getClassSimpleName(this);
 		logD(channel, objects);
 	}
 
@@ -70,7 +70,7 @@ public abstract class EinspunktnullService extends Service
 
 	public void loggE(Object... objects)
 	{
-		String channel = Klass.getClassSimpleName(this);
+		String channel = KlazzUtils.getClassSimpleName(this);
 		logE(channel, objects);
 	}
 
