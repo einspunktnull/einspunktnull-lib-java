@@ -4,9 +4,9 @@ public abstract class AbstractSerialCommDevice extends AbstractCommDevice
 {
 
 	protected String portname;
-	protected int baudrate;
+	protected long baudrate;
 
-	public AbstractSerialCommDevice(String name, ICommListener listener, int baudrate, String portname)
+	public AbstractSerialCommDevice(String name, ICommListener listener, long baudrate, String portname)
 	{
 		super(name, listener);
 		this.portname = portname;
@@ -16,5 +16,11 @@ public abstract class AbstractSerialCommDevice extends AbstractCommDevice
 	public abstract int available() throws CommDeviceException;
 
 	public abstract int read() throws CommDeviceException;
+
+	@Override
+	public String toString()
+	{
+		return "AbstractSerialCommDevice: " + name + ", " + portname + ", " + baudrate;
+	}
 
 }

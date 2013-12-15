@@ -41,7 +41,7 @@ public class RxTxSerialCommDevice extends AbstractSerialCommDevice implements Se
 				inputStream = serialPort.getInputStream();
 				outputStream = serialPort.getOutputStream();
 				serialPort.notifyOnDataAvailable(true);
-				serialPort.setSerialPortParams(baudrate, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+				serialPort.setSerialPortParams((int) baudrate, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
 				serialPort.addEventListener(this);
 				isListening = true;
 			}
@@ -115,7 +115,6 @@ public class RxTxSerialCommDevice extends AbstractSerialCommDevice implements Se
 		}
 
 	}
-	
 
 	@Override
 	public void write(byte bite) throws CommDeviceException
@@ -167,6 +166,12 @@ public class RxTxSerialCommDevice extends AbstractSerialCommDevice implements Se
 		{
 			throw new CommDeviceException("IOException", e);
 		}
+	}
+
+	@Override
+	public String toString()
+	{
+		return "RxTxSerialCommDevice: " + name + ", " + portname + ", " + baudrate;
 	}
 
 }

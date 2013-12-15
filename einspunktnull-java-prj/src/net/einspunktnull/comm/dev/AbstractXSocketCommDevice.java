@@ -1,7 +1,6 @@
 package net.einspunktnull.comm.dev;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
 import java.nio.BufferOverflowException;
 import java.nio.BufferUnderflowException;
 import java.nio.channels.ClosedChannelException;
@@ -10,46 +9,23 @@ import org.xsocket.MaxReadSizeExceededException;
 import org.xsocket.connection.IConnectHandler;
 import org.xsocket.connection.IDataHandler;
 import org.xsocket.connection.INonBlockingConnection;
-import org.xsocket.connection.Server;
 
-public class XSocketCommDevice extends AbstractCommDevice implements IDataHandler, IConnectHandler
+public abstract class AbstractXSocketCommDevice extends AbstractCommDevice implements IDataHandler, IConnectHandler
 {
 
-	private int portnumber;
+	protected int portnumber;
+	protected INonBlockingConnection nbc;
 
-	private Server server;
-
-	private INonBlockingConnection nbc;
-
-	public XSocketCommDevice(String name, ICommListener listener, int portnumber)
+	public AbstractXSocketCommDevice(String name, ICommListener listener, int portnumber)
 	{
 		super(name, listener);
 		this.portnumber = portnumber;
 	}
 
 	@Override
-	public void start() throws CommDeviceException
+	public String toString()
 	{
-		try
-		{
-			server = new Server(portnumber, this);
-			server.start();
-		}
-		catch (UnknownHostException e)
-		{
-			throw new CommDeviceException("UnknownHostException", e);
-		}
-		catch (IOException e)
-		{
-			throw new CommDeviceException("IOException", e);
-		}
-	}
-
-	@Override
-	public void stop() throws CommDeviceException
-	{
-		server.close();
-
+		return "AbstractXSocketCommDevice: " + name + ", " + portnumber;
 	}
 
 	@Override

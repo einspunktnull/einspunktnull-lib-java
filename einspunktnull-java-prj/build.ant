@@ -31,7 +31,7 @@
 
 
 	<target name="copy" depends="">
-		<copy file="build/jar/einspunktnull-java.jar" todir="D:\work\einspunktnull\osmod\soft\net.einspunktnull.osmod.core\lib\" overwrite="true" />
+		<copy file="build/jar/einspunktnull-java.jar" todir="D:\work\einspunktnull\osmod\dev\net.einspunktnull.osmod.core\lib\" overwrite="true" />
 		<!--
 		<copy file="build/jar/einspunktnull-java.jar" todir="D:\EINSPUNKTNULL\private\DynamoSky\DynamoSkyAndroidProjekt\libs\" overwrite="true" />
 		<copy file="build/jar/einspunktnull-java.jar" todir="D:\EINSPUNKTNULL\kunden\pingpool-online-production\teilauto\teilauto-mobile-svn\trunk\dev\htmlgen\teilauto_mobile_htmlgen\libs\" overwrite="true" />

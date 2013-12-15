@@ -18,6 +18,12 @@ public abstract class AbstractCommDevice
 	{
 		listener.onByteReceived(this, bite);
 	}
+	
+	@Override
+	public String toString()
+	{
+		return "AbstractCommDevice: "+ name;
+	}
 
 	public abstract void start() throws CommDeviceException;
 

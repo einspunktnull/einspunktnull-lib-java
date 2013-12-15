@@ -1,10 +1,13 @@
-package net.einspunktnull.comm.dev;
+package net.einspunktnull.comm.dev.impl;
 
 import gnu.io.SerialPortEvent;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import net.einspunktnull.comm.dev.CommDeviceException;
+import net.einspunktnull.comm.dev.ICommListener;
+import net.einspunktnull.comm.dev.RxTxSerialCommDevice;
 import net.einspunktnull.io.Sysout;
 
 public class LinkspriteJpegColorCameraRxTx extends RxTxSerialCommDevice
@@ -282,6 +285,12 @@ public class LinkspriteJpegColorCameraRxTx extends RxTxSerialCommDevice
 			throw new CommDeviceException("IOException", e);
 		}
 		return sb.toString();
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "LinkspriteJpegColorCameraRxTx: " + name + ", " + portname + ", " + baudrate;
 	}
 
 }

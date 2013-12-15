@@ -34,7 +34,7 @@ public class PI4JSerialCommDevice extends AbstractSerialCommDevice
 		}
 	}
 
-	public PI4JSerialCommDevice(String name, ICommListener listener, int baudrate, String portname)
+	public PI4JSerialCommDevice(String name, ICommListener listener, long baudrate, String portname)
 	{
 		super(name, listener, baudrate, portname);
 	}
@@ -43,7 +43,7 @@ public class PI4JSerialCommDevice extends AbstractSerialCommDevice
 	public void start() throws CommDeviceException
 	{
 		serial = SerialFactory.createInstance();
-		int ret = serial.open(portname, baudrate);
+		int ret = serial.open(portname, (int) baudrate);
 		if (ret == -1) { throw new CommDeviceException("ComPort connect failed: " + portname); }
 		currThread = new ListenThread();
 		currThread.start();
@@ -85,6 +85,12 @@ public class PI4JSerialCommDevice extends AbstractSerialCommDevice
 	public int read()
 	{
 		return serial.read();
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "PI4JSerialCommDevice: " + name + ", " + portname + ", " + baudrate;
 	}
 
 }
