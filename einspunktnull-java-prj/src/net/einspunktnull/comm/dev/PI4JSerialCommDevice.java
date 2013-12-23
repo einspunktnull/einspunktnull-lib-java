@@ -34,7 +34,7 @@ public class PI4JSerialCommDevice extends AbstractSerialCommDevice
 		}
 	}
 
-	public PI4JSerialCommDevice(String name, ICommListener listener, long baudrate, String portname)
+	public PI4JSerialCommDevice(String name, ICommDeviceListener listener, long baudrate, String portname)
 	{
 		super(name, listener, baudrate, portname);
 	}

@@ -1,7 +1,7 @@
 package net.einspunktnull.comm.dev;
 
 
-public interface ICommListener
+public interface ICommDeviceListener
 {
 
 	public void onByteReceived(AbstractCommDevice device, byte bite);

@@ -16,7 +16,7 @@ public abstract class AbstractXSocketCommDevice extends AbstractCommDevice imple
 	protected int portnumber;
 	protected INonBlockingConnection nbc;
 
-	public AbstractXSocketCommDevice(String name, ICommListener listener, int portnumber)
+	public AbstractXSocketCommDevice(String name, ICommDeviceListener listener, int portnumber)
 	{
 		super(name, listener);
 		this.portnumber = portnumber;

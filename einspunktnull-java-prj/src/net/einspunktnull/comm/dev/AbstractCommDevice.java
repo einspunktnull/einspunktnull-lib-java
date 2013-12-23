@@ -4,10 +4,10 @@ public abstract class AbstractCommDevice
 {
 
 	protected String name;
-	protected ICommListener listener;
+	protected ICommDeviceListener listener;
 	protected boolean isListening;
 
-	public AbstractCommDevice(String name, ICommListener listener)
+	public AbstractCommDevice(String name, ICommDeviceListener listener)
 	{
 		this.name = name;
 		this.listener = listener;

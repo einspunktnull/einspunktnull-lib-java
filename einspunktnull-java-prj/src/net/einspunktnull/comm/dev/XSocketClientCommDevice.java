@@ -9,7 +9,7 @@ public class XSocketClientCommDevice extends AbstractXSocketCommDevice
 
 	private String host;
 
-	public XSocketClientCommDevice(String name, ICommListener listener, String host, int portnumber)
+	public XSocketClientCommDevice(String name, ICommDeviceListener listener, String host, int portnumber)
 	{
 		super(name, listener, portnumber);
 		this.host = host;

@@ -6,7 +6,7 @@ public abstract class AbstractSerialCommDevice extends AbstractCommDevice
 	protected String portname;
 	protected long baudrate;
 
-	public AbstractSerialCommDevice(String name, ICommListener listener, long baudrate, String portname)
+	public AbstractSerialCommDevice(String name, ICommDeviceListener listener, long baudrate, String portname)
 	{
 		super(name, listener);
 		this.portname = portname;

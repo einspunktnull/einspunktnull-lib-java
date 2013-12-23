@@ -9,7 +9,7 @@ public class XSocketServerCommDevice extends AbstractXSocketCommDevice
 {
 	private Server server;
 
-	public XSocketServerCommDevice(String name, ICommListener listener, int portnumber)
+	public XSocketServerCommDevice(String name, ICommDeviceListener listener, int portnumber)
 	{
 		super(name, listener, portnumber);
 	}

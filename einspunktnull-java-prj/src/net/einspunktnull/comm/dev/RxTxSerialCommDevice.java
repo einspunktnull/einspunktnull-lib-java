@@ -22,7 +22,7 @@ public class RxTxSerialCommDevice extends AbstractSerialCommDevice implements Se
 	protected OutputStream outputStream;
 	private int timeout;
 
-	public RxTxSerialCommDevice(String name, ICommListener listener, int baudrate, String portname, int timeout)
+	public RxTxSerialCommDevice(String name, ICommDeviceListener listener, int baudrate, String portname, int timeout)
 	{
 		super(name, listener, baudrate, portname);
 		this.timeout = timeout;

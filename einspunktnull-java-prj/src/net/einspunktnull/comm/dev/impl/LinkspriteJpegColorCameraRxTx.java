@@ -6,7 +6,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import net.einspunktnull.comm.dev.CommDeviceException;
-import net.einspunktnull.comm.dev.ICommListener;
+import net.einspunktnull.comm.dev.ICommDeviceListener;
 import net.einspunktnull.comm.dev.RxTxSerialCommDevice;
 import net.einspunktnull.io.Sysout;
 
@@ -33,7 +33,7 @@ public class LinkspriteJpegColorCameraRxTx extends RxTxSerialCommDevice
 	{ 0x56, 0x00, 0x54, 0x01, 0x11 },
 	{ 0x56, 0x00, 0x54, 0x01, 0x22 } };
 
-	public LinkspriteJpegColorCameraRxTx(String name, ICommListener listener, int baudrate, String portname, int timeout)
+	public LinkspriteJpegColorCameraRxTx(String name, ICommDeviceListener listener, int baudrate, String portname, int timeout)
 	{
 		super(name, listener, baudrate, portname, timeout);
 	}
