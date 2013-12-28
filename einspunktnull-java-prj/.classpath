@@ -13,5 +13,6 @@
 	<classpathentry kind="lib" path="libs/pi4j-core.jar"/>
 	<classpathentry kind="lib" path="libs/xSocket-2.8.15.jar"/>
 	<classpathentry kind="lib" path="libs/commons-lang3-3.1.jar"/>
+	<classpathentry kind="lib" path="libs/jssc.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
