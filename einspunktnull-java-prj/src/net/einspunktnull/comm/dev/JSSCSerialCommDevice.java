@@ -4,6 +4,7 @@ import jssc.SerialPort;
 import jssc.SerialPortEvent;
 import jssc.SerialPortEventListener;
 import jssc.SerialPortException;
+import net.einspunktnull.io.Sysout;
 
 public class JSSCSerialCommDevice extends AbstractSerialCommDevice implements SerialPortEventListener
 {
@@ -18,19 +19,24 @@ public class JSSCSerialCommDevice extends AbstractSerialCommDevice implements Se
 	@Override
 	public void start() throws CommDeviceException
 	{
-		serialPort = new SerialPort(portname);
-		try
+		if (!running)
 		{
-			serialPort.openPort();
-			serialPort.setParams((int) baudrate, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
-			serialPort.setEventsMask(SerialPort.MASK_RXCHAR);
-			serialPort.addEventListener(this);
+			serialPort = new SerialPort(portname);
+			try
+			{
+				serialPort.openPort();
+				serialPort.setParams((int) baudrate, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
+				serialPort.setEventsMask(SerialPort.MASK_RXCHAR);
+				serialPort.addEventListener(this);
+				running = true;
 
+			}
+			catch (SerialPortException e)
+			{
+				throw new CommDeviceException("SerialPortException", e);
+			}
 		}
-		catch (SerialPortException e)
-		{
-			throw new CommDeviceException("SerialPortException", e);
-		}
+		else throw new CommDeviceException("Already running", null);
 
 	}
 
@@ -46,7 +52,8 @@ public class JSSCSerialCommDevice extends AbstractSerialCommDevice implements Se
 				{
 					byte[] bytes = serialPort.readBytes(1);
 					byte bite = bytes[0];
-					listener.onByteReceived(JSSCSerialCommDevice.this, bite);
+					super.onByteReceived(bite);
+//					listener.onByteReceived(JSSCSerialCommDevice.this, bite);
 				}
 			}
 
@@ -60,15 +67,20 @@ public class JSSCSerialCommDevice extends AbstractSerialCommDevice implements Se
 	@Override
 	public void stop() throws CommDeviceException
 	{
-		try
+		if (running)
 		{
-			serialPort.removeEventListener();
-			serialPort.closePort();
+			try
+			{
+				serialPort.removeEventListener();
+				serialPort.closePort();
+				running = false;
+			}
+			catch (SerialPortException e)
+			{
+				throw new CommDeviceException("SerialPortException", e);
+			}
 		}
-		catch (SerialPortException e)
-		{
-			throw new CommDeviceException("SerialPortException", e);
-		}
+		else throw new CommDeviceException("Not running", null);
 
 	}
 
@@ -138,5 +150,4 @@ public class JSSCSerialCommDevice extends AbstractSerialCommDevice implements Se
 	{
 		return "JSSCSerialCommDevice: " + name + ", " + portname + ", " + baudrate;
 	}
-
 }

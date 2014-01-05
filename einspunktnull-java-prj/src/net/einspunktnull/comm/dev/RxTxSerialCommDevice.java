@@ -11,7 +11,10 @@ import gnu.io.UnsupportedCommOperationException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.UnknownHostException;
 import java.util.TooManyListenersException;
+
+import org.xsocket.connection.Server;
 
 public class RxTxSerialCommDevice extends AbstractSerialCommDevice implements SerialPortEventListener
 {
@@ -31,7 +34,7 @@ public class RxTxSerialCommDevice extends AbstractSerialCommDevice implements Se
 	@Override
 	public void start() throws CommDeviceException
 	{
-		if (!isListening)
+		if (!running)
 		{
 
 			try
@@ -43,7 +46,7 @@ public class RxTxSerialCommDevice extends AbstractSerialCommDevice implements Se
 				serialPort.notifyOnDataAvailable(true);
 				serialPort.setSerialPortParams((int) baudrate, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
 				serialPort.addEventListener(this);
-				isListening = true;
+				running = true;
 			}
 			catch (NoSuchPortException e)
 			{
@@ -66,22 +69,28 @@ public class RxTxSerialCommDevice extends AbstractSerialCommDevice implements Se
 				throw new CommDeviceException("TooManyListenersException", e);
 			}
 		}
+		else throw new CommDeviceException("Already running", null);
 	}
 
 	@Override
 	public void stop() throws CommDeviceException
 	{
-		try
+		if (running)
 		{
-			outputStream.flush();
-			outputStream.close();
-			inputStream.close();
+			try
+			{
+				outputStream.flush();
+				outputStream.close();
+				inputStream.close();
+				running = false;
+			}
+			catch (IOException e)
+			{
+				throw new CommDeviceException("IOException", e);
+			}
+			serialPort.close();
 		}
-		catch (IOException e)
-		{
-			throw new CommDeviceException("IOException", e);
-		}
-		serialPort.close();
+		else throw new CommDeviceException("Not running", null);
 	}
 
 	@Override

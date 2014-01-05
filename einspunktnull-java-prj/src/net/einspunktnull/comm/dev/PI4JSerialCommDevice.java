@@ -1,5 +1,10 @@
 package net.einspunktnull.comm.dev;
 
+import java.io.IOException;
+import java.net.UnknownHostException;
+
+import org.xsocket.connection.Server;
+
 import com.pi4j.io.serial.Serial;
 import com.pi4j.io.serial.SerialFactory;
 
@@ -23,7 +28,8 @@ public class PI4JSerialCommDevice extends AbstractSerialCommDevice
 				if (serial.availableBytes() > 0)
 				{
 					char bite = serial.read();
-					listener.onByteReceived(PI4JSerialCommDevice.this, (byte) bite);
+					onByteReceived((byte) bite);
+//					listener.onByteReceived(PI4JSerialCommDevice.this, (byte) bite);
 				}
 			}
 		}
@@ -33,7 +39,7 @@ public class PI4JSerialCommDevice extends AbstractSerialCommDevice
 			isRunning = false;
 		}
 	}
-
+	
 	public PI4JSerialCommDevice(String name, ICommDeviceListener listener, long baudrate, String portname)
 	{
 		super(name, listener, baudrate, portname);
@@ -42,19 +48,29 @@ public class PI4JSerialCommDevice extends AbstractSerialCommDevice
 	@Override
 	public void start() throws CommDeviceException
 	{
-		serial = SerialFactory.createInstance();
-		int ret = serial.open(portname, (int) baudrate);
-		if (ret == -1) { throw new CommDeviceException("ComPort connect failed: " + portname); }
-		currThread = new ListenThread();
-		currThread.start();
+		if (!running)
+		{
+			serial = SerialFactory.createInstance();
+			int ret = serial.open(portname, (int) baudrate);
+			if (ret == -1) { throw new CommDeviceException("ComPort connect failed: " + portname); }
+			currThread = new ListenThread();
+			currThread.start();
+			running = true;
+		}
+		else throw new CommDeviceException("Already running", null);
 	}
 
 	@Override
-	public void stop()
+	public void stop() throws CommDeviceException
 	{
-		currThread.kill();
-		serial.flush();
-		serial.close();
+		if (running)
+		{
+			currThread.kill();
+			serial.flush();
+			serial.close();
+			running = false;
+		}
+		else throw new CommDeviceException("Not running", null);
 	}
 
 	@Override
@@ -86,7 +102,7 @@ public class PI4JSerialCommDevice extends AbstractSerialCommDevice
 	{
 		return serial.read();
 	}
-	
+
 	@Override
 	public String toString()
 	{

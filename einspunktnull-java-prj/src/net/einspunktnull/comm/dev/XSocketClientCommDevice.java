@@ -1,8 +1,10 @@
 package net.einspunktnull.comm.dev;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 
 import org.xsocket.connection.NonBlockingConnection;
+import org.xsocket.connection.Server;
 
 public class XSocketClientCommDevice extends AbstractXSocketCommDevice
 {
@@ -18,28 +20,39 @@ public class XSocketClientCommDevice extends AbstractXSocketCommDevice
 	@Override
 	public void start() throws CommDeviceException
 	{
-		try
+		if (!running)
 		{
-			nbc = new NonBlockingConnection(host, portnumber, this);
+
+			try
+			{
+				nbc = new NonBlockingConnection(host, portnumber, this);
+				running = true;
+			}
+			catch (IOException e)
+			{
+				throw new CommDeviceException("IOException", e);
+			}
 		}
-		catch (IOException e)
-		{
-			throw new CommDeviceException("IOException", e);
-		}
+		else throw new CommDeviceException("Already running", null);
 
 	}
 
 	@Override
 	public void stop() throws CommDeviceException
 	{
-		try
+		if (running)
 		{
-			nbc.close();
+			try
+			{
+				nbc.close();
+				running = false;
+			}
+			catch (IOException e)
+			{
+				throw new CommDeviceException("IOException", e);
+			}
 		}
-		catch (IOException e)
-		{
-			throw new CommDeviceException("IOException", e);
-		}
+		else throw new CommDeviceException("Not running", null);
 
 	}
 

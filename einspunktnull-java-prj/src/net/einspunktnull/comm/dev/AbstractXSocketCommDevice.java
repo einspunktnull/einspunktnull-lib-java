@@ -5,12 +5,15 @@ import java.nio.BufferOverflowException;
 import java.nio.BufferUnderflowException;
 import java.nio.channels.ClosedChannelException;
 
+import net.einspunktnull.io.Sysout;
+
 import org.xsocket.MaxReadSizeExceededException;
 import org.xsocket.connection.IConnectHandler;
 import org.xsocket.connection.IDataHandler;
+import org.xsocket.connection.IDisconnectHandler;
 import org.xsocket.connection.INonBlockingConnection;
 
-public abstract class AbstractXSocketCommDevice extends AbstractCommDevice implements IDataHandler, IConnectHandler
+public abstract class AbstractXSocketCommDevice extends AbstractCommDevice implements IDataHandler, IConnectHandler, IDisconnectHandler
 {
 
 	protected int portnumber;
@@ -92,7 +95,7 @@ public abstract class AbstractXSocketCommDevice extends AbstractCommDevice imple
 	public boolean onData(INonBlockingConnection nbc) throws IOException, BufferUnderflowException, ClosedChannelException, MaxReadSizeExceededException
 	{
 		byte bite = nbc.readByte();
-		listener.onByteReceived(this, bite);
+		super.onByteReceived(bite);
 		return false;
 	}
 
@@ -100,6 +103,19 @@ public abstract class AbstractXSocketCommDevice extends AbstractCommDevice imple
 	public boolean onConnect(INonBlockingConnection nbc) throws IOException, BufferUnderflowException, MaxReadSizeExceededException
 	{
 		this.nbc = nbc;
+		running = true;
+		listener.onConnect(this);
+		Sysout.println("!!! AbstractXSocketCommDevice.onConnect() !!!");
+		return false;
+	}
+
+	@Override
+	public boolean onDisconnect(INonBlockingConnection nbc) throws IOException, BufferUnderflowException, MaxReadSizeExceededException
+	{
+		this.nbc = null;
+		running = false;
+		listener.onDisconnect(this);
+		Sysout.println("!!! AbstractXSocketCommDevice.onDisconnect() !!!");
 		return false;
 	}
 

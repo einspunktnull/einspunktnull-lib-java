@@ -7,6 +7,7 @@ import org.xsocket.connection.Server;
 
 public class XSocketServerCommDevice extends AbstractXSocketCommDevice
 {
+
 	private Server server;
 
 	public XSocketServerCommDevice(String name, ICommDeviceListener listener, int portnumber)
@@ -17,25 +18,35 @@ public class XSocketServerCommDevice extends AbstractXSocketCommDevice
 	@Override
 	public void start() throws CommDeviceException
 	{
-		try
+		if (!running)
 		{
-			server = new Server(portnumber, this);
-			server.start();
+			try
+			{
+				server = new Server(portnumber, this);
+				server.start();
+				running = true;
+			}
+			catch (UnknownHostException e)
+			{
+				throw new CommDeviceException("UnknownHostException", e);
+			}
+			catch (IOException e)
+			{
+				throw new CommDeviceException("IOException", e);
+			}
 		}
-		catch (UnknownHostException e)
-		{
-			throw new CommDeviceException("UnknownHostException", e);
-		}
-		catch (IOException e)
-		{
-			throw new CommDeviceException("IOException", e);
-		}
+		else throw new CommDeviceException("Already running", null);
 	}
 
 	@Override
 	public void stop() throws CommDeviceException
 	{
-		server.close();
+		if (running)
+		{
+			server.close();
+			running = false;
+		}
+		else throw new CommDeviceException("Not running", null);
 	}
 
 	@Override
