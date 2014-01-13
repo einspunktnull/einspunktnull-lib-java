@@ -105,7 +105,6 @@ public abstract class AbstractXSocketCommDevice extends AbstractCommDevice imple
 		this.nbc = nbc;
 		running = true;
 		listener.onConnect(this);
-		Sysout.println("!!! AbstractXSocketCommDevice.onConnect() !!!");
 		return false;
 	}
 
@@ -115,7 +114,6 @@ public abstract class AbstractXSocketCommDevice extends AbstractCommDevice imple
 		this.nbc = null;
 		running = false;
 		listener.onDisconnect(this);
-		Sysout.println("!!! AbstractXSocketCommDevice.onDisconnect() !!!");
 		return false;
 	}
 
