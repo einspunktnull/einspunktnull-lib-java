@@ -20,10 +20,10 @@ public class AndroduinoBtService extends EinspunktnullService
 {
 
 	private BroadcastReceiver receiver;
-	private BluetoothAdapter adapter;
 	private int adapterState;
 	private int connectionState = AndroduinoBt.Connection.STATE_OFF;
 	private final IBinder binder = new AndroduinoBtServiceBinder();
+	private BluetoothAdapter adapter;
 	public BluetoothDevice device;
 	public BluetoothSocket socket;
 	private ConnectThread connectThread;

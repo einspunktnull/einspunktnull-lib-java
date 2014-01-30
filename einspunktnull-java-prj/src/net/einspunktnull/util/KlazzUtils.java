@@ -34,8 +34,19 @@ public class KlazzUtils
 		{
 			retObj = constructor.newInstance(parameters);
 		}
-		catch (InstantiationException | IllegalAccessException
-				| IllegalArgumentException | InvocationTargetException e)
+		catch (InvocationTargetException e)
+		{
+			e.printStackTrace();
+		}
+		catch (IllegalAccessException e)
+		{
+			e.printStackTrace();
+		}
+		catch (InstantiationException e)
+		{
+			e.printStackTrace();
+		}
+		catch (IllegalArgumentException e)
 		{
 			e.printStackTrace();
 		}

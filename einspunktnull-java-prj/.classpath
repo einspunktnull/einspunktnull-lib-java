@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="libs/android-15/android.jar"/>
+	<classpathentry kind="lib" path="libs/android-15/android.jar" sourcepath="D:/ProgramsPortable/android-sdk-windows/sources/android-19"/>
 	<classpathentry kind="lib" path="libs/greenDAO-1.2.0/greenDAO.jar"/>
 	<classpathentry kind="lib" path="libs/addon-google_apis-google_inc_-15/usb.jar"/>
 	<classpathentry kind="lib" path="libs/rxtx-2.2pre2/RXTXcomm.jar"/>
