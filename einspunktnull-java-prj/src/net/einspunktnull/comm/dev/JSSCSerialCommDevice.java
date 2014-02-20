@@ -48,12 +48,13 @@ public class JSSCSerialCommDevice extends AbstractSerialCommDevice implements Se
 		{
 			if (evt.isRXCHAR())
 			{
-				while (evt.getEventValue() > 0)
+				int numBytes = evt.getEventValue();
+
+				byte[] bytes = serialPort.readBytes(numBytes);
+				for (int i = 0; i < bytes.length; i++)
 				{
-					byte[] bytes = serialPort.readBytes(1);
-					byte bite = bytes[0];
+					byte bite = bytes[i];
 					super.onByteReceived(bite);
-//					listener.onByteReceived(JSSCSerialCommDevice.this, bite);
 				}
 			}
 
