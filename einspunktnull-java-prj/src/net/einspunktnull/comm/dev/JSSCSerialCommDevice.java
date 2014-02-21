@@ -26,7 +26,7 @@ public class JSSCSerialCommDevice extends AbstractSerialCommDevice implements Se
 			{
 				serialPort.openPort();
 				serialPort.setParams((int) baudrate, SerialPort.DATABITS_8, SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
-				serialPort.setEventsMask(SerialPort.MASK_RXCHAR);
+				serialPort.setEventsMask(SerialPort.MASK_RXCHAR | SerialPort.MASK_ERR);
 				serialPort.addEventListener(this);
 				running = true;
 
