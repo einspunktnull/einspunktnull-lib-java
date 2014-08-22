@@ -27,6 +27,12 @@ public abstract class Mediator implements IMediator, ActionListener
 		notificationInterests = new ArrayList<String>();
 	}
 
+	public Mediator(String name, Component viewComponent)
+	{
+		this(name);
+		this.viewComponent = viewComponent;
+	}
+
 	public void register()
 	{
 		onRegistered();
@@ -36,6 +42,11 @@ public abstract class Mediator implements IMediator, ActionListener
 	public Component getViewComponent()
 	{
 		return viewComponent;
+	}
+
+	public void setViewComponent(Component viewComponent)
+	{
+		this.viewComponent = viewComponent;
 	}
 
 	/***************************************************************
