@@ -134,7 +134,7 @@ public class FilePreferenzes
 		}
 		catch (Exception e)
 		{
-			return null;
+			return object;
 		}
 	}
 }
